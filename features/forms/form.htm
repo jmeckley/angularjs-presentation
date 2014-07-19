@@ -1,0 +1,36 @@
+﻿<alert type="warning" class="ng-hide" ng-show="theform.$dirty" close="theform.$setPristine()">
+    The form has been updated!
+</alert>
+
+<alert type="success" class="ng-hide" ng-show="showSubmitResult" >
+    Thank you for signing up for our news letter. Emails will be sent to <strong>{{emailaddress}}</strong>.
+</alert>
+
+<form name="theform" ng-submit="submit()" class="alert" ng-class="status()">
+    <div class="well well-lg">
+        <div class="form-group has-feedback" ng-class="ctrlstatus(theform.emailaddress)">
+            <label for="emailaddress" class="sr-only">Email Address</label>
+            <input type="email"
+                   required
+                   ng-model="emailaddress"
+                   name="emailaddress"
+                   id="emailaddress"
+                   placeholder="email address"
+                   class="form-control" />
+            <span class="glyphicon form-control-feedback" ng-class="ctrlstatusicon(theform.emailaddress)"></span>
+        </div>
+        <div class="checkbox form-group has-feedback" ng-class="ctrlstatus(theform.termsandconditions)">
+			<div class="checkbox">
+				<label for="termsandconditions">
+					<input type="checkbox"
+						   required
+						   name="termsandconditions"
+						   ng-model="termsandconditions"
+						   id="termsandconditions">
+					I agree to the terms and conditions.
+				</label>
+			</div>
+        </div>
+        <input type="submit" value="Sign up" class="btn btn-primary" ng-disabled="theform.$invalid" />
+    </div>
+</form>

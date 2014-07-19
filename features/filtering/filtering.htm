@@ -1,0 +1,26 @@
+﻿<div class="container-fluid">
+	<div class="row" style="padding-bottom:10px;">
+		<div class="col-md-3 col-md-offset-9">
+			<div class="input-group">
+				<input ng-model="search.name" class="form-control">
+				<div class="input-group-addon">
+					<span class="glyphicon glyphicon-search"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div ng-repeat="character in characters | filter:search:false | limitTo:20" class="col-md-3">
+			<div class="panel panel-info" style="height: 250px; overflow-y: auto;">
+				<div class="panel-heading">
+					<a href="/character/{{character.id}}">{{character.name}}</a>
+				</div>
+				<div class="panel-body">
+					<img ng-src="{{character.thumbnail}}" alt="{{character.name}}" />
+					<div ng-show="character.description">{{character.descrpition}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

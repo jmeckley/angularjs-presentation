@@ -1,0 +1,20 @@
+﻿<div class="container-fluid">
+	<div class="row">
+		<div ng-repeat="character in characters" class="col-md-3">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<a href="/character/{{character.id}}">{{character.name}}</a>
+				</div>
+				<div class="panel-body" style="height: 250px; overflow-y: auto;">
+					<img ng-src="{{character.thumbnail.path + '/landscape_medium.' + character.thumbnail.extension}}" alt="{{character.name}}" />
+					<div ng-show="character.description">{{character.description}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-show="pages > 1">
+    <div class="container-fluid">
+        <pagination total-items="paging.total" ng-model="paging.page" items-per-page="paging.pageSize" max-size="10" class="pagination-lg" ng-change="goto(paging.page)" boundary-links="true" rotate="false" num-pages="pages"></pagination>
+    </div>
+</nav>
