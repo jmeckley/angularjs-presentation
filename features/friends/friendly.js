@@ -9,7 +9,7 @@
     
     app.config(function ($routeProvider) {
         $routeProvider.when('/controller', {
-            templateUrl: '/features/friends/controller.htm',
+            templateUrl: 'features/friends/controller.htm',
             controller: 'friendlyController'
         });
     });
