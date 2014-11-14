@@ -49,7 +49,7 @@ describe('Angular - core services', function () {
 });
 
 describe("Angular Demo - Test", function () {
-    var scope, controller, injector;
+    var controllers, injector, controller;
 
     beforeEach(module('demo'));
 
@@ -57,27 +57,26 @@ describe("Angular Demo - Test", function () {
         hashProvider.override({/*no authentication, cleaner urls for testing*/});
     }));
     
-    beforeEach(inject(function ($controller, $rootScope, $injector) {
-        scope = $rootScope.$new();
-        controller = $controller;
+    beforeEach(inject(function ($controller, $injector) {
+        controllers = $controller;
         injector = $injector;
     }));
 
     describe('friendlyController', function () {
         beforeEach(function () {
-            controller('friendlyController', { $scope: scope });
+            controller = controllers('friendlyController');
         });
         
         it('should say hello to jason', function () {
-            scope.sayHello('jason');
+            controller.sayHello('jason');
 
-            expect(scope.showGreeting).toBe(true);
+            expect(controller.showGreeting).toBe(true);
         });
         
         it('should not say hello to null name', function () {
-            scope.sayHello(null);
+            controller.sayHello(null);
 
-            expect(scope.showGreeting).toBe(false);
+            expect(controller.showGreeting).toBe(false);
         });
     });
     
@@ -105,18 +104,17 @@ describe("Angular Demo - Test", function () {
 
                 httpBackend.whenGET(charactersUrl).respond({ data: { results: characters, offset: 2, limit: 20, total: 100 } });
                 
-                controller('charactersController', { $scope: scope, $routeParams: { pageNumber: 1 } });
+                controller = controllers('charactersController', { $routeParams: { pageNumber: 1 } });
                 
-                scope.$apply();
                 httpBackend.flush();
             });
 
             it('should be able to get a page of characters', function () {
-                expect(scope.characters).toEqual(characters);
+                expect(controller.items).toEqual(characters);
             });
             
             it('should be able to configure paging', function () {
-                expect(scope.paging).toEqual({
+                expect(controller.paging).toEqual({
                     total: 100,
                     page: 1,
                     pageSize: 20
@@ -124,7 +122,7 @@ describe("Angular Demo - Test", function () {
             });
             
             it('should be able to navigate to another page of characters', function () {
-                scope.goto(5);
+                controller.goto(5);
 
                 expect(location.path()).toBe('/characters/5');
             });
@@ -139,15 +137,14 @@ describe("Angular Demo - Test", function () {
 
                 httpBackend.whenGET(characterUrl).respond({ data: { results: [character] } });
                 
-                controller('characterController', { $scope: scope, $routeParams: { id: 1 } });
+                controller = controllers('characterController', { $routeParams: { id: 1 } });
                 
-                scope.$apply();//execute promises
                 httpBackend.flush(); //process http requests
 
             });
 
             it('should be able to get character with id of 1', function () {
-                expect(scope.character).toEqual(character);
+                expect(controller.item).toEqual(character);
             });
         });
     });

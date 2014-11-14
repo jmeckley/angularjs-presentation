@@ -89,7 +89,7 @@
         var page = parseInt($routeParams.pageNumber);
 
         marvelRepository.fetch(page - 1).then(function (data) {
-            self.characters = data.results;
+            self.items = data.results;
             self.paging = {
                 page: page,
                 total: data.total,
@@ -111,7 +111,7 @@
         };
 
         marvelRepository.get(characterId).then(function (character) {
-            self.character = character;
+            self.item = character;
         });
     });
     
