@@ -11,15 +11,15 @@
 	</div>
 
 	<div class="row">
-		<div ng-repeat="character in characters | filter:search:false | limitTo:20" class="col-md-3">
-			<div class="panel panel-info" style="height: 250px; overflow-y: auto;">
-				<div class="panel-heading">
-					<a href="/character/{{character.id}}">{{character.name}}</a>
-				</div>
-				<div class="panel-body">
-					<img ng-src="{{character.thumbnail}}" alt="{{character.name}}" />
-				</div>
-			</div>
-		</div>
+        <div ng-repeat="character in filterCtrl.characters | filter:search:false | limitTo:20" class="col-md-3">
+            <div class="panel panel-info" style="height: 250px; overflow-y: auto;">
+                <div class="panel-heading">
+                    <a href="/#/character/{{character.id}}">{{character.name}}</a>
+                </div>
+                <div class="panel-body">
+                    <img ng-src="{{character.thumbnail}}" alt="{{character.name}}" />
+                </div>
+            </div>
+        </div>
 	</div>
 </div>

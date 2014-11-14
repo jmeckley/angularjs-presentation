@@ -1,7 +1,7 @@
-﻿<h1>{{character.name}}</h1>
-<img ng-src="{{character.thumbnail.path}}/portrait_uncanny.{{character.thumbnail.extension}}" alt="{{character.name}}" />
-<p >{{character.description}}</p>
+﻿<h1>{{characterCtrl.character.name}}</h1>
+<img ng-src="{{characterCtrl.character.thumbnail.path}}/portrait_uncanny.{{characterCtrl.character.thumbnail.extension}}" alt="{{characterCtrl.character.name}}" />
+<p >{{characterCtrl.character.description}}</p>
 
 <p>
-    <button ng-click="back()" class="btn btn-lg btn-primary">back</button>
+    <button ng-click="characterCtrl.back()" class="btn btn-lg btn-primary">back</button>
 </p>

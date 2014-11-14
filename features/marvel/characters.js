@@ -84,32 +84,34 @@
         };
     });
     
-    app.controller('charactersController', function ($scope, $routeParams, marvelRepository, $location) {
+    app.controller('charactersController', function ($routeParams, marvelRepository, $location) {
+        var self = this;
         var page = parseInt($routeParams.pageNumber);
 
         marvelRepository.fetch(page - 1).then(function (data) {
-            $scope.characters = data.results;
-            $scope.paging = {
+            self.characters = data.results;
+            self.paging = {
                 page: page,
                 total: data.total,
                 pageSize: data.limit
             };
         });
 
-        $scope.goto = function (pageNumber) {
+        self.goto = function (pageNumber) {
             $location.path('/characters/' + pageNumber);
         };
     });
 
-    app.controller('characterController', function ($scope, $routeParams, marvelRepository, $window) {
+    app.controller('characterController', function ($routeParams, marvelRepository, $window) {
+        var self = this;
         var characterId = $routeParams.id;
 
-        $scope.back = function () {
+        self.back = function () {
             $window.history.back();
         };
 
         marvelRepository.get(characterId).then(function (character) {
-            $scope.character = character;
+            self.character = character;
         });
     });
     
@@ -117,14 +119,16 @@
         $routeProvider
             .when('/characters/:pageNumber', {
                 templateUrl: '/features/marvel/characters.htm',
-                controller: 'charactersController'
+                controller: 'charactersController',
+                controllerAs: 'charactersCtrl'
             })
             .when('/characters', {
                 redirectTo: '/characters/1'
             })
             .when('/character/:id', {
                 templateUrl: '/features/marvel/character.htm',
-                controller: 'characterController'
+                controller: 'characterController',
+                controllerAs: 'characterCtrl'
             });
     });
 }(window.angular, CryptoJS, Date));

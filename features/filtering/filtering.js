@@ -1,12 +1,13 @@
 ﻿(function (app) {
-    app.controller('clientFilteringController', function ($scope) {
-        $scope.characters = source();
+    app.controller('clientFilteringController', function () {
+        this.characters = source();
     });
     
     app.config(function ($routeProvider) {
         $routeProvider.when('/filtering', {
             templateUrl: '/features/filtering/filtering.htm',
-            controller: 'clientFilteringController'
+            controller: 'clientFilteringController',
+            controllerAs: 'filterCtrl'
         });
     });
 
